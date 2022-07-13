@@ -1,5 +1,5 @@
-import 'package:candidateapp/app_one/the_first_app.dart';
-import 'package:candidateapp/app_two/the_second_app.dart';
+import 'package:candidateapp/first_app/material_app.dart';
+import 'package:candidateapp/second_app/material_app.dart';
 import 'package:candidateapp/extensions/buildcontext_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
