@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-///The repository for [SharedPreferences] management and other operations.
-class SharedPrefsRepository {
+///This utility has been made for [SharedPreferences] operations.
+class SharedPrefsUtil {
   static SharedPreferences? _prefs;
 
   static Future<SharedPreferences> init() async {
@@ -25,9 +25,7 @@ class SharedPrefsRepository {
           {required String key, required String value}) async =>
       await _prefs!.setString(key, value);
 
-  static Future<bool> setStringList(
-          {required String key, required List<String> value}) async =>
-      await _prefs!.setStringList(key, value);
+  static Future<bool> setStringList({required String key, required List<String> value}) async => await _prefs!.setStringList(key, value);
 
   static bool? getBool({required String key}) => _prefs!.getBool(key);
 
@@ -37,11 +35,12 @@ class SharedPrefsRepository {
 
   static String? getString({required String key}) => _prefs!.getString(key);
 
-  static List<String>? getStringList({required String key}) =>
-      _prefs!.getStringList(key);
+  static List<String>? getStringList({required String key}) => _prefs!.getStringList(key);
 
   static Future<bool> remove({required String key}) async =>
       await _prefs!.remove(key);
 
   static Future<bool> clear() async => await _prefs!.clear();
 }
+
+

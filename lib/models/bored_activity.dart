@@ -1,5 +1,5 @@
 
-//This is the model class of Bored API activity. This is contains toMap and fromMap methods too.
+///This is the model class of Bored API activity. This is contains [toMap] and [fromMap] methods too.
 class BoredActivity {
   String activity;
   String type;
@@ -23,10 +23,10 @@ class BoredActivity {
         activity: map['activity'],
         type: map['type'],
         participants: map['participants'],
-        price: map['price'],
+        price: double.parse(map['price'].toString()),
         link: map['link'],
         key: map['key'],
-        accessibility: map['accessibility']);
+        accessibility: double.parse(map['accessibility'].toString()));
   }
 
   Map<String, dynamic> toMap() {

@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:candidateapp/models/bored_activity.dart';
 import 'package:candidateapp/models/filters/activity_participants.dart';
 import 'package:candidateapp/models/filters/activity_price.dart';
 import 'package:candidateapp/models/filters/activity_type.dart';
 import 'package:candidateapp/models/filters/filter.dart';
 import 'package:candidateapp/services/base/bored_activity.dart';
+import 'package:candidateapp/utils/shared_prefs.dart';
 import 'package:http/http.dart';
 
 import '../../models/filters/activity_no_filter.dart';
@@ -20,6 +23,8 @@ class LiveBoredActivityService implements BoredActivityBase {
 
   static const String _baseURL = 'http://www.boredapi.com/api';
   static final Client _client = Client();
+
+
 
   @override
   Future<BoredActivity> getRandomActivityByFilter(
@@ -39,18 +44,18 @@ class LiveBoredActivityService implements BoredActivityBase {
     }
   }
 
+  //#region Fetch by filter logics
   Future<BoredActivity> _noFilterFetch(ActivityNoFilter filter) async {
     Response response = await _client.get(Uri.parse('$_baseURL/activity'));
     if (response.statusCode == 200) {
       String mapString = response.body;
-      return BoredActivity.fromMap(map: (mapString as Map<String, dynamic>));
+      return BoredActivity.fromMap(map: jsonDecode(mapString));
     } else {
       throw Exception('An error occoured while fetching data.');
     }
   }
 
-  Future<BoredActivity> _participantsFilterFetch(
-      ActivityParticipantsFilter filter) async {
+  Future<BoredActivity> _participantsFilterFetch(ActivityParticipantsFilter filter) async {
     Response response = await _client.get(
         Uri.parse('$_baseURL/activity?participants=${filter.participants}'));
     if (response.statusCode == 200) {
@@ -82,21 +87,35 @@ class LiveBoredActivityService implements BoredActivityBase {
       throw Exception('An error occoured while fetching data.');
     }
   }
+  //#endregion
 
   @override
   Future<bool> addToFavs({required String activityID}) {
-    // TODO: implement addToFavs
-    throw UnimplementedError();
+    try{
+      List<String> favlist = SharedPrefsUtil.getStringList(key: 'favs') ?? [];
+      favlist.add(activityID);
+      SharedPrefsUtil.setStringList(key: 'favs', value: favlist);
+      return Future.value(true);
+    }
+    catch(ex){
+      rethrow;
+    }
   }
 
   @override
   Future<bool> removeFromFavs({required String activityID}) {
-    // TODO: implement removeFromFavs
-    throw UnimplementedError();
+    try{
+      List<String> favlist = SharedPrefsUtil.getStringList(key: 'favs') ?? [];
+      if(favlist.contains(activityID)){
+        favlist.removeAt(favlist.indexOf(activityID));
+      }
+      SharedPrefsUtil.setStringList(key: 'favs', value: favlist);
+      return Future.value(true);
+    }
+    catch(ex){
+      rethrow;
+    }
   }
-
-  @override
-  List<BoredActivity> favs = [];
 
   @override
   Future<BoredActivity> getActivityByID({required String activityID}) async {
@@ -109,4 +128,20 @@ class LiveBoredActivityService implements BoredActivityBase {
       throw Exception('An error occoured while fetching data.');
     }
   }
+
+  @override
+  Future<List<BoredActivity>> get favs async{
+    try{
+      List<BoredActivity> acts = [];
+      List<String> favlist = SharedPrefsUtil.getStringList(key: 'favs') ?? [];
+      for(String id in favlist){
+        acts.add(await getActivityByID(activityID: id));
+      }
+      return acts;
+    }
+    catch(ex){
+      rethrow;
+    }
+  }
+
 }

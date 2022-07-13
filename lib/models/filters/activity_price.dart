@@ -1,11 +1,11 @@
 import 'package:candidateapp/models/filters/filter.dart';
 
-//A type of activity filters. Model class.
+///A type of activity filters. Model class.
 class ActivityPriceFilter implements Filter{
   @override
-  FilterType filterType;
-  double minPrice;
-  double maxPrice;
+  final FilterType filterType = FilterType.price;
+  final double minPrice;
+  final double maxPrice;
 
-  ActivityPriceFilter({required this.filterType, required this.minPrice, required this.maxPrice});
+  ActivityPriceFilter({required this.minPrice, required this.maxPrice});
 }

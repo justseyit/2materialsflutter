@@ -1,3 +1,14 @@
 {
-  "helloWorld": "Hello World!"
+  "theFirstApp": "The First App",
+  "theSecondApp": "The Second App",
+  "selectFilter": "Select Filter",
+  "home": "Home",
+  "favorites": "Favorites",
+  "activity": "Activity",
+  "accessibility": "Accessibility",
+  "type": "Type",
+  "participants": "Participants",
+  "price": "Price",
+  "link": "Link",
+  "key": "Key"
 }

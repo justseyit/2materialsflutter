@@ -31,11 +31,12 @@ class MockBoredActivityService implements BoredActivityBase {
   }
 
   @override
-  List<BoredActivity> favs = [];
-
-  @override
   Future<BoredActivity> getActivityByID({required String activityID}) {
     // TODO: implement getActivityByID
     throw UnimplementedError();
   }
+
+  @override
+  // TODO: implement favs
+  Future<List<BoredActivity>> get favs => throw UnimplementedError();
 }
