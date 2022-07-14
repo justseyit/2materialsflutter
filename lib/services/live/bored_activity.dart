@@ -11,6 +11,7 @@ import 'package:http/http.dart';
 
 import '../../models/filters/activity_no_filter.dart';
 
+//These methods have explanations. They are explained at the repository class.
 class LiveBoredActivityService implements BoredActivityBase {
   static LiveBoredActivityService? _instance;
 
@@ -27,8 +28,7 @@ class LiveBoredActivityService implements BoredActivityBase {
 
 
   @override
-  Future<BoredActivity> getRandomActivityByFilter(
-      {required Filter filter}) async {
+  Future<BoredActivity> getRandomActivityByFilter({required Filter filter}) async {
     try {
       if (filter.filterType == FilterType.participants) {
         return await _participantsFilterFetch(filter as ActivityParticipantsFilter);
@@ -60,7 +60,7 @@ class LiveBoredActivityService implements BoredActivityBase {
         Uri.parse('$_baseURL/activity?participants=${filter.participants}'));
     if (response.statusCode == 200) {
       String mapString = response.body;
-      return BoredActivity.fromMap(map: (mapString as Map<String, dynamic>));
+      return BoredActivity.fromMap(map: jsonDecode(mapString));
     } else {
       throw Exception('An error occoured while fetching data.');
     }
@@ -71,7 +71,7 @@ class LiveBoredActivityService implements BoredActivityBase {
         '$_baseURL/activity?minprice=${filter.minPrice}&maxprice=${filter.maxPrice}'));
     if (response.statusCode == 200) {
       String mapString = response.body;
-      return BoredActivity.fromMap(map: (mapString as Map<String, dynamic>));
+      return BoredActivity.fromMap(map: jsonDecode(mapString));
     } else {
       throw Exception('An error occoured while fetching data.');
     }
@@ -82,7 +82,7 @@ class LiveBoredActivityService implements BoredActivityBase {
         .get(Uri.parse('$_baseURL/activity?type=${filter.activityType}'));
     if (response.statusCode == 200) {
       String mapString = response.body;
-      return BoredActivity.fromMap(map: (mapString as Map<String, dynamic>));
+      return BoredActivity.fromMap(map: jsonDecode(mapString));
     } else {
       throw Exception('An error occoured while fetching data.');
     }
@@ -93,7 +93,9 @@ class LiveBoredActivityService implements BoredActivityBase {
   Future<bool> addToFavs({required String activityID}) {
     try{
       List<String> favlist = SharedPrefsUtil.getStringList(key: 'favs') ?? [];
-      favlist.add(activityID);
+      if(!favlist.contains(activityID)){
+        favlist.add(activityID);
+      }
       SharedPrefsUtil.setStringList(key: 'favs', value: favlist);
       return Future.value(true);
     }
@@ -123,11 +125,12 @@ class LiveBoredActivityService implements BoredActivityBase {
         await _client.get(Uri.parse('$_baseURL/activity?key=$activityID'));
     if (response.statusCode == 200) {
       String mapString = response.body;
-      return BoredActivity.fromMap(map: (mapString as Map<String, dynamic>));
+      return BoredActivity.fromMap(map: jsonDecode(mapString));
     } else {
       throw Exception('An error occoured while fetching data.');
     }
   }
+
 
   @override
   Future<List<BoredActivity>> get favs async{

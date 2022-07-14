@@ -10,5 +10,17 @@
   "participants": "Participants",
   "price": "Price",
   "link": "Link",
-  "key": "Key"
+  "key": "Key",
+  "fetchAgain": "Fetch Again",
+  "makeFavorite": "Make Favorite",
+  "noFilter": "No Filter",
+  "priceFilter": "Price Filter",
+  "participantsFilter": "Participants Filter",
+  "activityTypeFilter": "Activity Type Filter",
+  "convertToTRY": "Convert to TRY",
+  "removeFromFavorites": "Remove From Favorites",
+  "removedFromFavorites": "Removed from favorites.",
+  "addedToFavorites": "Added to favorites.",
+  "cantFetchTheActivities": "Can't fetch the activities.",
+  "retry": "Retry"
 }

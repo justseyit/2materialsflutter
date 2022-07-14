@@ -1,6 +1,7 @@
 import 'package:candidateapp/models/filters/activity_no_filter.dart';
 import 'package:candidateapp/services/live/bored_activity.dart';
 import 'package:candidateapp/services/mock/bored_activity.dart';
+import 'package:candidateapp/utils/shared_prefs.dart';
 
 import '../models/bored_activity.dart';
 import '../models/filters/filter.dart';
@@ -86,4 +87,21 @@ class BoredActivityRepository {
         return _liveBoredActivityService.favs;
     }
   }
+
+  ///This is the generator method to stream favs list to second app.
+  Stream<List<BoredActivity>> getFavAvtivitiesStream() async*{
+    while(true){
+      yield await favs;
+    }
+  }
+
+  //USD-TRY price rate change operations.
+  bool _convertPricesToTRY = false;
+
+  set convertPricesToTRY(bool value){
+    SharedPrefsUtil.setBool(key: 'convertPricesToTRY', value: value);
+    _convertPricesToTRY = value;
+  }
+
+  bool get convertPricesToTRY => _convertPricesToTRY;
 }

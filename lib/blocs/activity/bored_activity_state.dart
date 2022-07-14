@@ -1,4 +1,8 @@
+///This file contains states that possible while fetching the activities.
+
 part of 'bored_activity_bloc.dart';
+
+
 
 abstract class BoredActivityState extends Equatable {
   const BoredActivityState();

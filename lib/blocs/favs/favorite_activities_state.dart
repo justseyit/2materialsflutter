@@ -1,3 +1,6 @@
+///This file contains states that possible while fetching the favorite activities.
+
+
 part of 'favorite_activities_bloc.dart';
 
 abstract class FavoriteActivitiesState extends Equatable {

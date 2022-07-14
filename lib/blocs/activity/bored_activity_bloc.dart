@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 part 'bored_activity_event.dart';
 part 'bored_activity_state.dart';
 
+///The businness logic component class to bind events and states.
 class BoredActivityBloc extends Bloc<BoredActivityEvent, BoredActivityState> {
   BoredActivityBloc() : super(BoredActivityInitial()) {
     on<BoredActivityEvent>((event, emit) {});

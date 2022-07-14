@@ -13,4 +13,15 @@ class ActivityTypes{
   static const String relaxation = "relaxation";
   static const String music = "music";
   static const String busywork = "busywork";
+  static const List<String> all = [
+    education,
+    recreational,
+    social,
+    diy,
+    charity,
+    cooking,
+    relaxation,
+    music,
+    busywork
+  ];
 }

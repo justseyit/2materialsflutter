@@ -18,6 +18,7 @@ class BoredActivity {
       required this.key,
       required this.accessibility});
 
+  ///Sometimes an integer-double value can be fetched. double.parse() used for avoid the data type errors.
   factory BoredActivity.fromMap({required Map<String, dynamic> map}) {
     return BoredActivity(
         activity: map['activity'],

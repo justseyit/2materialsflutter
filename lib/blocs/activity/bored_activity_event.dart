@@ -4,6 +4,7 @@ abstract class BoredActivityEvent extends Equatable {
   const BoredActivityEvent();
 }
 
+///An BLoC evet to fetch the activities.
 class FetchBoredActivityEvent extends BoredActivityEvent{
   @override
   List<Object?> get props => [filter];

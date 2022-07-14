@@ -7,6 +7,7 @@ import '../../models/bored_activity.dart';
 part 'favorite_activities_event.dart';
 part 'favorite_activities_state.dart';
 
+///The businness logic component class to bind events and states.
 class FavoriteActivitiesBloc extends Bloc<FavoriteActivitiesEvent, FavoriteActivitiesState> {
   FavoriteActivitiesBloc() : super(FavoriteActivitiesInitial()) {
     on<FavoriteActivitiesEvent>((event, emit) {});

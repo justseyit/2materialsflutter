@@ -1,6 +1,7 @@
 import 'package:candidateapp/blocs/activity/bored_activity_bloc.dart';
 import 'package:candidateapp/blocs/favs/favorite_activities_bloc.dart';
 import 'package:candidateapp/first_app/material_app.dart';
+import 'package:candidateapp/repositories/bored_activity_repository.dart';
 import 'package:candidateapp/second_app/material_app.dart';
 import 'package:candidateapp/extensions/buildcontext_extension.dart';
 import 'package:candidateapp/utils/shared_prefs.dart';
@@ -14,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsUtil.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-  GlobalKey key = GlobalKey();
+  BoredActivityRepository.instance.convertPricesToTRY = SharedPrefsUtil.getBool(key: 'convertPricesToTRY') ?? false;
   runApp(const MyApp());
 }
 
