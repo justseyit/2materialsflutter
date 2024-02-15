@@ -2,6 +2,9 @@
 
 CatchPad Candidate App
 
+This project show how to run two MaterialApps in one Flutter application in the same time
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
